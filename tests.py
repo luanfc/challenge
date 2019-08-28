@@ -1,31 +1,29 @@
-from unitest import TestCase, main
-from desafio import solucao
-"""
-Ordem dos inputs: S, A, L
+from unittest import TestCase, main
 
-input: 1, 1, 1
-output: 1, ou 2, ou 3 (todos estão incorreto)
+from desafio import solucao, indices
 
-input: 3, 1, 3
-output: 1, ou 3 (somente o local está correto)
 
-input: 5, 3, 4
-output: 1 (somente o assassino está incorreto)
+class TestDesafio(TestCase):
 
-input: 2, 3, 4
-output: 0 (todos corretos)
-"""
+    def test_todas_opcoes_estao_erradas(self):
+        entrada = indices
+        esperado = [1, 2, 3]
+        self.assertEqual(solucao(entrada), (esperado[0] or esperado[1] or esperado[2]))
 
-class TestCifraCesar(TestCase):
-	def test_solucao_entrada_111_retorna_1_ou_2_ou_3(self)
-		entrada = [1, 1, 1]
-		esperado = [1, 2, 3]
-		self.assertEqual(solucao(entrada), esperado)
-	def test_solucao_entrada_313_retorna_1_ou_3(self)
-		pass
-	def test_solucao_entrada_534_retorna_1(self)
-		pass
-	def test_solucao_entrada_234_retorna_0(self)
-		pass
+    def test_somente_a_arma_esta_correta(self):
+        entrada = [indices[0], indices[1] + 1, indices[2]]
+        esperado = [1, 3]
+        self.assertEqual(solucao(entrada), (esperado[0] or esperado[1]))
+
+    def test_somente_o_assassino_esta_correto(self):
+        entrada = [indices[0] + 1, indices[1], indices[2]]
+        esperado = 1
+        self.assertEqual(solucao(entrada), esperado)
+
+    def test_todas_opcoes_corretas(self):
+        entrada = [indices[0] + 1, indices[1] + 1, indices[2] + 1]
+        esperado = 0
+        self.assertEqual(solucao(entrada), esperado)
+
 
 main()
